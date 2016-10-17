@@ -5,28 +5,25 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import {visibilityFilter, todos, TodosEffects} from './store/reducers';
-
-import { TodosDataService } from './services/todos-data.service';
-
-import { TodoApp } from './app.component';
-
-import { FilterSelect } from './components/filter-select';
-import { TodoInput } from './components/todo-input';
-import { TodoList } from './components/todo-list';
+import {AppState, getAnswerChoicesFromContentItem, getQuestionState, rootReducer} from './store/index';
+import {ContentItemEffects} from './store/content-item-effects';
+import { ContentItemDataService } from './services/content-item-data.service';
+import { StuiApp } from './app.component';
+import { Question } from './components/question';
+import { AnswerChoices } from './components/answer-choices';
 
 @NgModule({
   declarations: [
-    TodoApp,
-    FilterSelect,
-    TodoInput,
-    TodoList
+    StuiApp,
+    Question,
+    AnswerChoices
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({visibilityFilter, todos}),
+
+    StoreModule.provideStore(rootReducer),
      /**
      * runEffects configures all providers for @ngrx/effects. Observables decorated
      * as an @Effect() within the supplied services will ultimately be merged,
@@ -36,9 +33,9 @@ import { TodoList } from './components/todo-list';
      *
      * Source: https://github.com/ngrx/effects/blob/master/lib/run-effects.ts#L8-L20
      */
-    EffectsModule.run(TodosEffects)
+    EffectsModule.run(ContentItemEffects)
   ],
-  providers: [TodosDataService],
-  bootstrap: [TodoApp]
+  providers: [ContentItemDataService],
+  bootstrap: [StuiApp]
 })
 export class AppModule { }

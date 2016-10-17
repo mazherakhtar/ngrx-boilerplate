@@ -1,16 +1,12 @@
-export interface AppState {
-    Todos: Todo[],
-    VisibilityFilter: any
+export interface QuestionModel {
+    stimulus: string,
+    questionStem: string,
+    answerChoices: AnswerChoice[]
 }
 
-export interface Todo {
-    id: number,
+export interface AnswerChoice {
+    label: string,
     text: string,
-    isCompleted: boolean
-};
-
-export interface TodoModel {
-    filteredTodos: Todo[],
-    totalTodos: number,
-    completedTodos: number
+    isCorrect: boolean,
+    isSelected: boolean
 }
