@@ -21,5 +21,6 @@ export function getQuestionState() {
 }
 
 export function getAnswerChoicesFromContentItem() {
+    //inner composer functions run from right to left i.e. getAnswerChoices(getQuestionState())
     return compose(getAnswerChoices(), getQuestionState());
 }
